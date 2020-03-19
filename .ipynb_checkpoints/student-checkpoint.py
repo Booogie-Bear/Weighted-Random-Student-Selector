@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from typing import List
+
 class Person():
     """A object oriented intepretation of a normal human being. Persons have the following properties:
     ...
@@ -72,7 +74,7 @@ class GStudent(Person):
         Returns probability weight of student
 
     """
-    def __init__(self, first_name:str, last_name:str, pWeight:float=0.0):
+    def __init__(self, first_name:str, last_name:str, pWeight:float=None):
         """
         Parameters
         ----------
