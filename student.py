@@ -102,12 +102,3 @@ class GClass:
 
     def createClass(self, student_names:List[str]) -> None:
         pass
-
-
-tu = GStudent("Tu", "Pham", 0.5)
-
-print(type(tu))
-# print(dir(tu))
-
-g120ds = GClass("Data Science", 120)
-print(g120ds)
