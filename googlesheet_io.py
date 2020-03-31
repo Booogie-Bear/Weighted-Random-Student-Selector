@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Taken/Guided from https://www.makeuseof.com/tag/read-write-google-sheets-python/
-
 import json
 import gspread
 from oauth2client.client import SignedJwtAssertionCredentials
