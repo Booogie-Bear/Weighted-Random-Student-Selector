@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import normalize
@@ -10,24 +9,33 @@ import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 
 
-test_names = ["Bob", "Jim", "Pam", "Michael"]
-weights = np.array([1 for _ in range(len(test_names))])
-weights[0] = 5
-test_dict = dict(zip(test_names, weights))
+def init_weight(name_arr:np.array) -> np.array:
+    return 1 / len(name_arr)
+def init_count(count_arr:np.array, events=1000) -> np.array:
+    return np.array([events for _ in range(len(count_arr))])
+def norm_weight(count_arr:np.array) -> np.array:
+    return count_arr / sum(count_arr)
 
-picked = dict(zip(test_names, [0 for _ in range(len(test_names))]))
-for i in range(1, 50):
-    weights = np.array(list(test_dict.values()))
-    norm_w = weights / sum(weights)
-    draw = np.random.choice(list(test_dict.keys()), 1, p=norm_w)
-    test_dict[draw[0]] = 1 / i
-    picked[draw[0]] += 1
-    # print(draw, norm_w)
+names = ["Bob", "Jim", "Pam", "Michael", "Dwight"]
+counts = init_count(names)
 
-test_dict = dict(zip(test_names, norm_w))
+class_df = pd.DataFrame({
+        "Name" : names,
+        "Count" : counts,
+        "Weight" : init_weight(names)
+        }
+)
 
-print(test_dict)
-print(picked)
+
+
+draw = np.random.choice(class_df["Name"], 1, p=class_df["Weight"])
+print(class_df.loc[class_df['Name'] == draw[0]])
+d_idx = class_df.index[class_df["Name"] == draw[0]]
+class_df[d_idx].at["Count"] -= 1
+print(draw)
+print(class_df.loc[class_df['Name'] == draw[0]])
+
+# print(class_df)
 
 """
 [0, 0, 0, 0]
